@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PISO PRINT PROMO - Loyalty Card Registration</title>
+    <link rel="icon" type="image/webp" href="file:///D:/The%20Golden%20Voice/unnamed.webp">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .admin-toggle {
+            margin-top: 20px;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .procedure-section {
+            background: #e3f2fd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .procedure-section h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .procedure-step {
+            background: white;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border-left: 3px solid #4ECDC4;
+            font-size: 14px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .form-section h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 3px solid #4ECDC4;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #4ECDC4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
+
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: #4ECDC4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45b7aa;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        /* Transaction Slip Styles */
+        .transaction-slip {
+            width: 100%;
+            background: white;
+            border: none;
+            padding: 0.5in;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            line-height: 1.4;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .slip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .slip-logo {
+            width: 80px;
+            height: 80px;
+            background: #4ECDC4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            overflow: hidden;
+            font-size: 10pt;
+        }
+
+        .slip-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .slip-title {
+            text-align: center;
+            flex: 1;
+            margin: 0 25px;
+        }
+
+        .slip-title h2 {
+            margin: 0;
+            font-size: 24pt;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .slip-title .tagline {
+            margin: 5px 0;
+            font-style: italic;
+            font-size: 12pt;
+            color: #666;
+        }
+
+        .slip-title .subtitle {
+            margin: 10px 0 0 0;
+            font-weight: bold;
+            font-size: 16pt;
+            color: #333;
+        }
+
+        .slip-content {
+            font-size: 12pt;
+            line-height: 1.6;
+        }
+
+        .slip-field {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slip-field strong {
+            min-width: 180px;
+            color: #333;
+        }
+
+        .slip-field span {
+            flex: 1;
+            text-align: right;
+            color: #000;
+            font-weight: normal;
+        }
+
+        .qr-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 25px;
+            gap: 30px;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .qr-code-container h4 {
+            margin: 0 0 10px 0;
+            font-size: 12pt;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .notes-section {
+            flex: 1;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .notes-section h4 {
+            margin: 0 0 15px 0;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .notes-section ul {
+            margin: 0;
+            padding-left: 25px;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+
+        .notes-section li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Admin Portal Styles */
+        .admin-portal {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            margin: 20px 0;
+        }
+
+        .admin-login {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .admin-section {
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #4ECDC4;
+            margin: 10px 0;
+        }
+
+        .stat-card h4 {
+            margin: 0 0 10px 0;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4ECDC4;
+        }
+
+        @media print {
+            @page {
+                size: letter landscape;
+                margin: 0;
+            }
+            body * {
+                visibility: hidden;
+            }
+            .transaction-slip, .transaction-slip * {
+                visibility: visible;
+            }
+            .transaction-slip {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                margin: 0;
+                padding: 0.5in;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎓 PISO PRINT PROMO</h1>
+            <p>Student Loyalty Card Registration System</p>
+            <div class="admin-toggle">
+                <button class="btn btn-secondary" onclick="toggleAdminPortal()" id="adminToggleBtn">
+                    🔐 Admin Portal
+                </button>
+            </div>
+        </header>
+
+        <div class="procedure-section">
+            <h3>📋 Step-by-Step Registration Procedure</h3>
+            <div class="procedure-step">
+                <strong>Step 1:</strong> Fill out all required student information in the form below
+            </div>
+            <div class="procedure-step">
+                <strong>Step 2:</strong> Select your education level (JHS G7-G10, SHS G11-G12, or College 1st-4th year)
+            </div>
+            <div class="procedure-step">
+                <strong>Step 3:</strong> Click "Generate & Print Transaction Slip" to automatically print your receipt
+            </div>
+        </div>
+
+        <!-- Admin Portal -->
+        <div id="adminPortal" class="admin-portal" style="display: none;">
+            <h2>🔐 ADMIN PORTAL</h2>
+            
+            <!-- Admin Login -->
+            <div id="adminLogin" class="admin-login">
+                <h3>Administrator Login</h3>
+                <div class="form-group" style="max-width: 300px; margin: 0 auto;">
+                    <label for="adminPassword">Admin Password:</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password">
+                </div>
+                <button class="btn btn-primary" onclick="adminLogin()">Login</button>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">Default password: admin123</p>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="admin-dashboard">
+                <div class="admin-nav">
+                    <button class="btn btn-primary" onclick="showAdminSection('dashboard')">📊 Dashboard</button>
+                    <button class="btn btn-primary" onclick="showAdminSection('students')">👥 Students</button>
+                    <button class="btn btn-primary" onclick="showAdminSection('transactions')">🧾 Transactions</button>
+                    <button class="btn btn-secondary" onclick="adminLogout()">🚪 Logout</button>
+                </div>
+
+                <!-- Dashboard Section -->
+                <div id="adminDashboardSection" class="admin-section">
+                    <h3>📊 System Dashboard</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div class="stat-card">
+                            <h4>Total Students</h4>
+                            <div class="stat-number" id="totalStudents">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Today's Registrations</h4>
+                            <div class="stat-number" id="todayRegistrations">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Total Transactions</h4>
+                            <div class="stat-number" id="totalTransactions">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students Section -->
+                <div id="adminStudentsSection" class="admin-section" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>👥 Student Management</h3>
+                        <div>
+                            <button class="btn btn-success" onclick="exportStudentsData()">📊 Export Data</button>
+                            <button class="btn btn-danger" onclick="clearAllStudents()">🗑️ Clear All</button>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; background: white;">
+                            <thead>
+                                <tr style="background: #4ECDC4; color: white;">
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Card ID</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Level</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <tr>
+                                    <td colspan="5" style="padding: 20px; text-align: center; color: #666;">No students registered yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Transactions Section -->
+                <div id="adminTransactionsSection" class="admin-section" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>🧾 Transaction History</h3>
+                        <div>
+                            <button class="btn btn-success" onclick="exportTransactionsData()">📊 Export Data</button>
+                            <button class="btn btn-danger" onclick="clearAllTransactions()">🗑️ Clear All</button>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; background: white;">
+                            <thead>
+                                <tr style="background: #4ECDC4; color: white;">
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Transaction ID</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Student</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Card ID</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Date & Time</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody">
+                                <tr>
+                                    <td colspan="5" style="padding: 20px; text-align: center; color: #666;">No transactions yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2>📝 Student Registration Form</h2>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" name="firstName" required oninput="this.value = this.value.toUpperCase()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" name="lastName" required oninput="this.value = this.value.toUpperCase()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Complete Address:</label>
+                        <textarea id="address" name="address" rows="3" required oninput="this.value = this.value.toUpperCase()"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="educationLevel">Education Level:</label>
+                        <select id="educationLevel" name="educationLevel" required>
+                            <option value="">Select Education Level</option>
+                            <option value="JHS G7">JHS - Grade 7</option>
+                            <option value="JHS G8">JHS - Grade 8</option>
+                            <option value="JHS G9">JHS - Grade 9</option>
+                            <option value="JHS G10">JHS - Grade 10</option>
+                            <option value="SHS G11">SHS - Grade 11</option>
+                            <option value="SHS G12">SHS - Grade 12</option>
+                            <option value="College 1st">College - 1st Year</option>
+                            <option value="College 2nd">College - 2nd Year</option>
+                            <option value="College 3rd">College - 3rd Year</option>
+                            <option value="College 4th">College - 4th Year</option>
+                        </select>
+                    </div>
+
+
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button type="button" class="btn btn-success" onclick="generateTransactionSlip()" style="font-size: 18px; padding: 15px 30px;">
+                            🧾 Generate & Print Transaction Slip
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Transaction Slip -->
+        <div class="transaction-slip" id="transactionSlip">
+            <div class="slip-header">
+                <div class="slip-logo">
+                    <img src="file:///D:/JORENZ%20FILES/JMB.png" alt="Left Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='JMB';">
+                </div>
+                <div class="slip-title">
+                    <h2>JMB PRINTING SERVICES</h2>
+                    <p class="tagline">HIGH QUALITY PRINTS</p>
+                    <p class="subtitle">PISO PRINT PROMO - TRANSACTION SLIP</p>
+                </div>
+                <div class="slip-logo">
+                    <img src="file:///D:/JORENZ%20FILES/Colorful%20Printing%20and%20Digital%20Shop%20Logo.jpg" alt="Right Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='LOGO';">
+                </div>
+            </div>
+            
+            <div class="slip-content">
+                <div class="slip-field">
+                    <strong>Transaction Number:</strong>
+                    <span id="slipTransactionNumber">-</span>
+                </div>
+                <div class="slip-field">
+                    <strong>Date & Time:</strong>
+                    <span id="slipDateTime">-</span>
+                </div>
+                <div class="slip-field">
+                    <strong>Customer Name:</strong>
+                    <span id="slipCustomerName">-</span>
+                </div>
+                <div class="slip-field">
+                    <strong>Education Level:</strong>
+                    <span id="slipEducationLevel">-</span>
+                </div>
+                <div class="slip-field">
+                    <strong>Card ID:</strong>
+                    <span id="slipCardID">-</span>
+                </div>
+                
+                <div class="qr-section">
+                    <div class="notes-section">
+                        <h4>IMPORTANT NOTES:</h4>
+                        <ul>
+                            <li>Present this card for PISO PRINT services at participating locations</li>
+                            <li>Card is valid for current academic year only and expires at year-end</li>
+                            <li>Lost or stolen cards require re-registration with applicable replacement fee</li>
+                            <li>Card is non-transferable and for registered student use only</li>
+                            <li>Damaged or defaced cards must be replaced immediately for continued service</li>
+                            <li>Keep this transaction slip as proof of registration and card validity</li>
+                            <li>Report any issues or discrepancies to JMB Printing Services immediately</li>
+                            <li>Terms and conditions apply - subject to change without prior notice</li>
+                        </ul>
+                    </div>
+                    <div class="qr-code-container">
+                        <h4>SCAN QR CODE</h4>
+                        <div class="qr-code" id="qrCodeContainer">
+                            <img id="qrCodeImage" alt="QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='QR CODE';">
+                        </div>
+                        <p style="font-size: 9pt; margin: 8px 0 0 0; color: #666;">Scan to verify card</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin Data Storage
+        let adminData = {
+            students: JSON.parse(localStorage.getItem('pisoprint_students') || '[]'),
+            transactions: JSON.parse(localStorage.getItem('pisoprint_transactions') || '[]')
+        };
+
+        // Generate Card ID in format 4902-XXXX-XXX-X
+        function generateCardID() {
+            const timestamp = Date.now().toString();
+            const random1 = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            const random2 = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            const random3 = Math.floor(Math.random() * 10).toString();
+            
+            return `4902-${random1}-${random2}-${random3}`;
+        }
+
+
+
+        // Admin Portal Functions
+        function toggleAdminPortal() {
+            const portal = document.getElementById('adminPortal');
+            const btn = document.getElementById('adminToggleBtn');
+            
+            if (portal.style.display === 'none') {
+                portal.style.display = 'block';
+                btn.textContent = '❌ Close Admin Portal';
+            } else {
+                portal.style.display = 'none';
+                btn.textContent = '🔐 Admin Portal';
+                adminLogout();
+            }
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                showAdminSection('dashboard');
+                showAlert('✅ Admin login successful!', 'success');
+            } else {
+                showAlert('❌ Invalid admin password!', 'error');
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function showAdminSection(section) {
+            document.querySelectorAll('.admin-section').forEach(el => el.style.display = 'none');
+            document.getElementById(`admin${section.charAt(0).toUpperCase() + section.slice(1)}Section`).style.display = 'block';
+            
+            if (section === 'dashboard') {
+                updateDashboard();
+            } else if (section === 'students') {
+                updateStudentsTable();
+            } else if (section === 'transactions') {
+                updateTransactionsTable();
+            }
+        }
+
+        function updateDashboard() {
+            const students = adminData.students;
+            const transactions = adminData.transactions;
+            const today = new Date().toDateString();
+            
+            document.getElementById('totalStudents').textContent = students.length;
+            document.getElementById('todayRegistrations').textContent = 
+                students.filter(s => new Date(s.registrationDate).toDateString() === today).length;
+            document.getElementById('totalTransactions').textContent = transactions.length;
+        }
+
+        function updateStudentsTable() {
+            const tbody = document.getElementById('studentsTableBody');
+            const students = adminData.students;
+            
+            if (students.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; color: #666;">No students registered yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = students.map((student, index) => `
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${student.name}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${student.cardID}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${student.educationLevel}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${new Date(student.registrationDate).toLocaleDateString()}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        <button class="btn btn-primary" onclick="viewStudent(${index})" style="padding: 5px 10px; font-size: 12px; margin: 2px;">👁️ View</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(${index})" style="padding: 5px 10px; font-size: 12px; margin: 2px;">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateTransactionsTable() {
+            const tbody = document.getElementById('transactionsTableBody');
+            const transactions = adminData.transactions;
+            
+            if (transactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; color: #666;">No transactions yet</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = transactions.map((transaction, index) => `
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${transaction.transactionNumber}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${transaction.studentName}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${transaction.cardID}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${new Date(transaction.dateTime).toLocaleString()}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        <button class="btn btn-primary" onclick="viewTransaction(${index})" style="padding: 5px 10px; font-size: 12px; margin: 2px;">👁️ View</button>
+                        <button class="btn btn-danger" onclick="deleteTransaction(${index})" style="padding: 5px 10px; font-size: 12px; margin: 2px;">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function generateTransactionSlip() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const address = document.getElementById('address').value;
+            const dob = document.getElementById('dob').value;
+            const educationLevel = document.getElementById('educationLevel').value;
+
+            if (!firstName || !lastName || !address || !dob || !educationLevel) {
+                showAlert('Please fill in all required fields!', 'error');
+                return;
+            }
+
+            // Generate unique card ID and transaction number
+            const cardID = generateCardID();
+            const transactionNumber = 'TXN' + Date.now().toString().slice(-10);
+            
+            // Get current date and time
+            const now = new Date();
+            const dateTime = now.toLocaleString();
+
+            // Store student data
+            const studentData = {
+                cardID,
+                name: `${firstName} ${lastName}`,
+                firstName,
+                lastName,
+                address,
+                dob,
+                educationLevel,
+                registrationDate: now.toISOString()
+            };
+
+            // Store transaction data
+            const transactionData = {
+                transactionNumber,
+                studentName: `${firstName} ${lastName}`,
+                cardID,
+                dateTime: now.toISOString(),
+                educationLevel
+            };
+
+            // Save to localStorage
+            adminData.students.push(studentData);
+            adminData.transactions.push(transactionData);
+            localStorage.setItem('pisoprint_students', JSON.stringify(adminData.students));
+            localStorage.setItem('pisoprint_transactions', JSON.stringify(adminData.transactions));
+
+            // Update transaction slip
+            document.getElementById('slipTransactionNumber').textContent = transactionNumber;
+            document.getElementById('slipDateTime').textContent = dateTime;
+            document.getElementById('slipCustomerName').textContent = `${firstName} ${lastName}`;
+            document.getElementById('slipEducationLevel').textContent = educationLevel;
+            document.getElementById('slipCardID').textContent = cardID;
+
+            // Generate QR Code with card information
+            const qrData = `PISO PRINT PROMO CARD
+Card ID: ${cardID}
+Name: ${firstName} ${lastName}
+Level: ${educationLevel}
+Transaction: ${transactionNumber}
+Date: ${dateTime}`;
+            
+            generateQRCode(qrData);
+
+            // Show transaction slip and auto-print
+            document.getElementById('transactionSlip').style.display = 'block';
+            
+            setTimeout(() => {
+                window.print();
+                document.getElementById('transactionSlip').style.display = 'none';
+            }, 500);
+
+            showAlert('✅ Transaction slip generated and printing automatically!', 'success');
+            
+            // Reset form
+            document.getElementById('studentForm').reset();
+        }
+
+        function generateQRCode(data) {
+            const encodedData = encodeURIComponent(data);
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodedData}&format=png&bgcolor=FFFFFF&color=000000&margin=10`;
+            
+            const qrImage = document.getElementById('qrCodeImage');
+            qrImage.src = qrCodeUrl;
+            qrImage.style.display = 'block';
+        }
+
+        // Admin Action Functions
+        function viewStudent(index) {
+            const student = adminData.students[index];
+            const details = `
+                <strong>Student Details:</strong><br><br>
+                <strong>Name:</strong> ${student.name}<br>
+                <strong>Card ID:</strong> ${student.cardID}<br>
+                <strong>Address:</strong> ${student.address}<br>
+                <strong>Date of Birth:</strong> ${student.dob}<br>
+                <strong>Education Level:</strong> ${student.educationLevel}<br>
+                <strong>Registration Date:</strong> ${new Date(student.registrationDate).toLocaleString()}
+            `;
+            showAlert(details, 'info');
+        }
+
+        function deleteStudent(index) {
+            const student = adminData.students[index];
+            showConfirm(`Are you sure you want to delete student "${student.name}"?`, () => {
+                adminData.students.splice(index, 1);
+                localStorage.setItem('pisoprint_students', JSON.stringify(adminData.students));
+                updateStudentsTable();
+                updateDashboard();
+                showAlert('✅ Student deleted successfully!', 'success');
+            });
+        }
+
+        function viewTransaction(index) {
+            const transaction = adminData.transactions[index];
+            const details = `
+                <strong>Transaction Details:</strong><br><br>
+                <strong>Transaction ID:</strong> ${transaction.transactionNumber}<br>
+                <strong>Student:</strong> ${transaction.studentName}<br>
+                <strong>Card ID:</strong> ${transaction.cardID}<br>
+                <strong>Education Level:</strong> ${transaction.educationLevel}<br>
+                <strong>Date & Time:</strong> ${new Date(transaction.dateTime).toLocaleString()}
+            `;
+            showAlert(details, 'info');
+        }
+
+        function deleteTransaction(index) {
+            const transaction = adminData.transactions[index];
+            showConfirm(`Are you sure you want to delete transaction "${transaction.transactionNumber}"?`, () => {
+                adminData.transactions.splice(index, 1);
+                localStorage.setItem('pisoprint_transactions', JSON.stringify(adminData.transactions));
+                updateTransactionsTable();
+                updateDashboard();
+                showAlert('✅ Transaction deleted successfully!', 'success');
+            });
+        }
+
+        function exportStudentsData() {
+            if (adminData.students.length === 0) {
+                showAlert('No student data to export!', 'error');
+                return;
+            }
+            
+            const csvContent = 'Name,Card ID,Address,Date of Birth,Education Level,Registration Date\n' +
+                adminData.students.map(student => 
+                    `"${student.name}","${student.cardID}","${student.address}","${student.dob}","${student.educationLevel}","${new Date(student.registrationDate).toLocaleString()}"`
+                ).join('\n');
+            
+            downloadCSV(csvContent, 'students_data.csv');
+            showAlert('✅ Student data exported successfully!', 'success');
+        }
+
+        function exportTransactionsData() {
+            if (adminData.transactions.length === 0) {
+                showAlert('No transaction data to export!', 'error');
+                return;
+            }
+            
+            const csvContent = 'Transaction ID,Student Name,Card ID,Education Level,Date & Time\n' +
+                adminData.transactions.map(transaction => 
+                    `"${transaction.transactionNumber}","${transaction.studentName}","${transaction.cardID}","${transaction.educationLevel}","${new Date(transaction.dateTime).toLocaleString()}"`
+                ).join('\n');
+            
+            downloadCSV(csvContent, 'transactions_data.csv');
+            showAlert('✅ Transaction data exported successfully!', 'success');
+        }
+
+        function clearAllStudents() {
+            if (adminData.students.length === 0) {
+                showAlert('No student data to clear!', 'error');
+                return;
+            }
+            
+            showConfirm('Are you sure you want to delete ALL student records? This action cannot be undone!', () => {
+                adminData.students = [];
+                localStorage.setItem('pisoprint_students', JSON.stringify(adminData.students));
+                updateStudentsTable();
+                updateDashboard();
+                showAlert('✅ All student records cleared!', 'success');
+            });
+        }
+
+        function clearAllTransactions() {
+            if (adminData.transactions.length === 0) {
+                showAlert('No transaction data to clear!', 'error');
+                return;
+            }
+            
+            showConfirm('Are you sure you want to delete ALL transaction records? This action cannot be undone!', () => {
+                adminData.transactions = [];
+                localStorage.setItem('pisoprint_transactions', JSON.stringify(adminData.transactions));
+                updateTransactionsTable();
+                updateDashboard();
+                showAlert('✅ All transaction records cleared!', 'success');
+            });
+        }
+
+        function downloadCSV(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function showConfirm(message, onConfirm) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            `;
+
+            const confirmBox = document.createElement('div');
+            confirmBox.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                max-width: 400px;
+                text-align: center;
+                border-left: 5px solid #dc3545;
+            `;
+
+            confirmBox.innerHTML = `
+                <p style="margin: 0 0 20px 0; font-size: 16px; color: #333;">${message}</p>
+                <div>
+                    <button onclick="this.closest('.confirm-overlay').remove()" 
+                            style="background: #6c757d; color: white; border: none; padding: 10px 20px; 
+                                   border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px;">Cancel</button>
+                    <button onclick="confirmAction()" 
+                            style="background: #dc3545; color: white; border: none; padding: 10px 20px; 
+                                   border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px;">Confirm</button>
+                </div>
+            `;
+
+            overlay.className = 'confirm-overlay';
+            overlay.appendChild(confirmBox);
+            document.body.appendChild(overlay);
+
+            window.confirmAction = function() {
+                onConfirm();
+                overlay.remove();
+                delete window.confirmAction;
+            };
+        }
+
+        function showAlert(message, type) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            `;
+
+            const alertBox = document.createElement('div');
+            const borderColor = type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#4ECDC4';
+            alertBox.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                max-width: 500px;
+                text-align: center;
+                border-left: 5px solid ${borderColor};
+            `;
+
+            alertBox.innerHTML = `
+                <div style="margin: 0 0 20px 0; font-size: 16px; color: #333; line-height: 1.5;">${message}</div>
+                <button onclick="this.closest('.alert-overlay').remove()" 
+                        style="background: #4ECDC4; color: white; border: none; padding: 10px 20px; 
+                               border-radius: 5px; cursor: pointer; font-weight: bold;">OK</button>
+            `;
+
+            overlay.className = 'alert-overlay';
+            overlay.appendChild(alertBox);
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                if (overlay.parentNode) {
+                    overlay.remove();
+                }
+            }, 5000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9928d6aa14694ee8',t:'MTc2MTEzNDQ3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
